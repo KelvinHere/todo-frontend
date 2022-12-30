@@ -3,8 +3,8 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-function Tasks() {
 
+function Tasks({tasks}) {
     let mockTasks = [
     {
         "task": "Clear out the loft",
@@ -14,7 +14,7 @@ function Tasks() {
     },
     {
         "task": "Fix car brakes",
-        "completed": false,
+        "completed": true,
         "importance": "High",
         "created": "9:00am 9-12-2022"
     }]
@@ -22,7 +22,10 @@ function Tasks() {
     return (
     <section className="tasks p-0 mx-0">
       <Row className="bg-dark text-white rounded-top m-0 p-3">
-        <Col className="col-7">
+      <Col className="col-1">
+          <p className='mb-0'><b>Done</b></p>
+        </Col>
+        <Col className="col-6">
           <p className='mb-0'><b>Task</b></p>
         </Col>
         <Col>
@@ -32,9 +35,12 @@ function Tasks() {
           <p className='mb-0'><b>Created</b></p>
         </Col>
       </Row>
-      {mockTasks.map(task => (
+      {tasks.map(task => (
         <Row className='bg-secondary text-white m-0 px-3 pt-3'>
-          <Col className="col-7">
+          <Col className="col-1">
+          <input type="checkbox" checked={task.completed} />
+          </Col>
+          <Col className="col-6">
             <p className='mb-0'>{task.task}</p>
           </Col>
           <Col>
