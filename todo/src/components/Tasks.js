@@ -1,28 +1,12 @@
 // Create list of tasks from passed items
-import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-
-function Tasks({tasks}) {
-    let mockTasks = [
-    {
-        "task": "Clear out the loft",
-        "completed": false,
-        "importance": "Low",
-        "created": "9:00am 10-12-2022"
-    },
-    {
-        "task": "Fix car brakes",
-        "completed": true,
-        "importance": "High",
-        "created": "9:00am 9-12-2022"
-    }]
-    
-    return (
+function Tasks({ tasks }) {
+  return (
     <section className="tasks p-0 mx-0">
       <Row className="bg-dark text-white rounded-top m-0 p-3">
-      <Col className="col-1">
+        <Col className="col-1">
           <p className='mb-0'><b>Done</b></p>
         </Col>
         <Col className="col-6">
@@ -36,9 +20,9 @@ function Tasks({tasks}) {
         </Col>
       </Row>
       {tasks.map(task => (
-        <Row className='bg-secondary text-white m-0 px-3 pt-3'>
+        <Row key={task.id} className='bg-secondary text-white m-0 px-3 pt-3'>
           <Col className="col-1">
-          <input type="checkbox" checked={task.completed} />
+            <input type="checkbox" defaultChecked={task.completed} />
           </Col>
           <Col className="col-6">
             <p className='mb-0'>{task.task}</p>
@@ -55,8 +39,8 @@ function Tasks({tasks}) {
         <Col>
         </Col>
       </Row>
-   </section>
-    );
-  }
+    </section>
+  );
+}
 
 export default Tasks

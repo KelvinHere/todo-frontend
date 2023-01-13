@@ -1,34 +1,62 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Row, Col } from 'react-bootstrap';
+import axios from 'axios';
+import { useState } from 'react';
 
 function TaskForm() {
-  return (
-    <section className="bg-dark p-3 rounded my-3">
-        <Form className=''>
-            <Form.Group controlId="formTask">
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        createTask(e);
+    }
+
+    const createTask = async (e) => {
+        console.log("im in create task");
+         const res = await axios.post('http://localhost:8000/',
+             {
+                 task: e.target[0].value,
+                 importance: e.target[1].value,
+                 completed: false
+             })
+        console.log("after setting task");
+    }
+
+    return (
+        <section className="bg-dark p-3 rounded my-3">
+            <Form onSubmit={handleSubmit}>
                 <Row>
-                    <Col sm={7} className="py-2 py-sm-0">
-                        <Form.Control type="text" placeholder="Enter task..." />
+                    <Col xs={12} lg={8}>
+                        <Form.Group className="mb-3 mb-lg-0" controlId="formTaskDescription">
+                            <Form.Control type="text" placeholder="Enter new task" />
+                        </Form.Group>
                     </Col>
-                    <Col sm={3} className="py-2 py-sm-0 px-sm-1">
-                        <select class="form-select" aria-label="Importance">
-                            <option selected>Importance</option>
-                            <option value="1">High</option>
-                            <option value="2">Medium</option>
-                            <option value="3">Low</option>
-                        </select>
+                    <Col xs={12} lg={2}>
+                        <Form.Group className="mb-3 mb-lg-0" controlId="formImportance">
+                            <Form.Select aria-label="Default select example">
+                                <option>Importance</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </Form.Select>
+                        </Form.Group>
                     </Col>
-                    <Col sm={2} className="py-2 py-sm-0">
+                    <Col xs={12} lg={2}>
                         <Button variant="primary" type="submit">
-                            Create
+                            Crete New Task
                         </Button>
                     </Col>
                 </Row>
-            </Form.Group>
-        </Form>
-    </section>
-  );
+            </Form>
+        </section>
+    );
 }
 
 export default TaskForm;
