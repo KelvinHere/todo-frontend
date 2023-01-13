@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react';
 import axios from "axios";
 import LoadingSpinner from './components/Loading';
 import Container from 'react-bootstrap/Container';
+import SortButtons from './components/SortButtons';
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
       <Container fluid>
         <h1 className='mt-3'>Tasks</h1>
         <TaskForm updateTasks={updateTasks} />
+        <SortButtons setTasks={setTasks} updateTasks={updateTasks} />
         {tasks ? <Tasks tasks={tasks} updateTasks={updateTasks} /> : <LoadingSpinner />}
       </Container>
     </div>
