@@ -2,9 +2,11 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Row, Col } from 'react-bootstrap';
 import axios from 'axios';
-import { useState } from 'react';
 
-function TaskForm() {
+
+
+
+function TaskForm({updateTasks}) {
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -12,14 +14,13 @@ function TaskForm() {
     }
 
     const createTask = async (e) => {
-        console.log("im in create task");
          const res = await axios.post('http://localhost:8000/',
              {
                  task: e.target[0].value,
                  importance: e.target[1].value,
                  completed: false
              })
-        console.log("after setting task");
+        updateTasks();
     }
 
     return (

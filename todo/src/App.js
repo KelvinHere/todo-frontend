@@ -9,12 +9,7 @@ import axios from "axios";
 import LoadingSpinner from './components/Loading';
 import Container from 'react-bootstrap/Container';
 
-
 function App() {
-  const [tasks, setTasks] = useState(null)
-  useEffect(() => {
-    getTasks()
-  }, [])
 
   function getTasks() {
     axios.get('http://localhost:8000').then(
@@ -24,13 +19,23 @@ function App() {
     )
   }
 
+  const updateTasks = () => {
+    getTasks();
+  }
+
+  const [tasks, setTasks] = useState(null)
+  useEffect(() => {
+    getTasks();
+  }, [])
+
+
   return (
     <div className="App">
       <NavbarTodo />
 
       <Container fluid>
         <h1 className='mt-3'>Tasks</h1>
-        <TaskForm />
+        <TaskForm updateTasks={updateTasks} />
         {tasks ? <Tasks tasks={tasks} /> : <LoadingSpinner />}
       </Container>
     </div>
