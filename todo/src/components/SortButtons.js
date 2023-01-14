@@ -1,60 +1,56 @@
 import React from "react";
+import { useState } from 'react';
 import { Button } from "react-bootstrap";
 import { Row, Col } from 'react-bootstrap';
+import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 
-const SortButtons = ({ setTasks, updateTasks }) => {
-    function handleSortTaskAsc(e) {
-        axios.get('http://localhost:8000/?sortBy=NAME_ASC').then(
-            (result) => {setTasks(result.data);}
-        );
+const SortButtons = ({ setQuery, setSortOrder }) => {
+    function handleQuery(incomingQuery) {
+        setQuery(incomingQuery);
     }
 
-    function handleSortTaskDesc(e) {
-        axios.get('http://localhost:8000/?sortBy=NAME_DESC').then(
-            (result) => {setTasks(result.data);}
-        );
+    function handleSortOrder(order) {
+        setSortOrder(order);
     }
-
-    function handleSortImportanceAsc(e) {
-        axios.get('http://localhost:8000/?sortBy=IMPORTANCE_ASC').then(
-            (result) => {setTasks(result.data);}
-        );
-    }
-
-    function handleSortImportanceDesc(e) {
-        axios.get('http://localhost:8000/?sortBy=IMPORTANCE_DESC').then(
-            (result) => {setTasks(result.data);}
-        );
-    }
-    
 
     return (
         <Row className="mb-3">
             <Col>
                 <Row className="justify-content-md-center">
                     <Col md="auto">
-                        <Button variant="success" onClick={(e) => (handleSortTaskAsc())}>Asc</Button>
+                        <Button variant="success" onClick={(e) => (handleSortOrder('NAME_ASC'))}>Asc</Button>
                     </Col>
                     <Col md="auto">
                         <p><b>Name</b></p>
                     </Col>
                     <Col md="auto">
-                        <Button variant="success" onClick={(e) => (handleSortTaskDesc())}>Desc</Button>
+                        <Button variant="success" onClick={(e) => (handleSortOrder('NAME_DESC'))}>Desc</Button>
                     </Col>
                 </Row>
             </Col>
 
             <Col>
+                <Form>
+                    <Form.Group controlId="formQuery">
+                        <Form.Control
+                            type="text"
+                            placeholder="Search"
+                            onChange={e => handleQuery(e.target.value)}/>
+                    </Form.Group>
+                </Form>
+            </Col>
+
+            <Col>
                 <Row className="justify-content-md-center">
                     <Col md="auto">
-                    <Button variant="success" onClick={(e) => (handleSortImportanceAsc())}>Asc</Button>
+                        <Button variant="success" onClick={(e) => (handleSortOrder('IMPORTANCE_ASC'))}>Asc</Button>
                     </Col>
                     <Col md="auto">
                         <p><b>Importance</b></p>
                     </Col>
                     <Col md="auto">
-                    <Button variant="success" onClick={(e) => (handleSortImportanceDesc())}>Desc</Button>
+                        <Button variant="success" onClick={(e) => (handleSortOrder('IMPORTANCE_DESC'))}>Desc</Button>
                     </Col>
                 </Row>
             </Col>

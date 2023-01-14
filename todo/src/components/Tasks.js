@@ -17,10 +17,7 @@ function Tasks({ tasks, updateTasks }) {
     }
   }
 
-
   const updateTask = async (task, importance, id, completedUpdate) => {
-    console.log("In update task");
-    console.log(id);
     const res = await axios.put('http://localhost:8000/'+id, {'completed': completedUpdate, 'importance': importance, 'task': task});
     updateTasks();
   }

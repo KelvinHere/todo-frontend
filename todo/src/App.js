@@ -11,9 +11,21 @@ import Container from 'react-bootstrap/Container';
 import SortButtons from './components/SortButtons';
 
 function App() {
+  const [query, setQuery] = useState('')
+  const [sortOrder, setSortOrder] = useState('NAME_ASC')
+  useEffect(() => {
+    getTasks();
+  }, [sortOrder, query])
+
+  const [tasks, setTasks] = useState(null)
+  useEffect(() => {
+    getTasks();
+  }, []);
 
   function getTasks() {
-    axios.get('http://localhost:8000').then(
+    let request = 'http://localhost:8000/?q=' + query + '&sortBy=' + sortOrder;
+    console.log(request);
+    axios.get(request,).then(
       (result) => {
         setTasks(result.data);
       }
@@ -24,12 +36,6 @@ function App() {
      getTasks();
    }
 
-  const [tasks, setTasks] = useState(null)
-  useEffect(() => {
-    getTasks();
-  }, [])
-
-
   return (
     <div className="App">
       <NavbarTodo />
@@ -37,8 +43,8 @@ function App() {
       <Container fluid>
         <h1 className='mt-3'>Tasks</h1>
         <TaskForm updateTasks={updateTasks} />
-        <SortButtons setTasks={setTasks} updateTasks={updateTasks} />
-        {tasks ? <Tasks tasks={tasks} updateTasks={updateTasks} /> : <LoadingSpinner />}
+        <SortButtons setQuery={setQuery} setSortOrder={setSortOrder} />
+        {tasks ? <Tasks tasks={tasks} updateTasks={updateTasks} query={query} /> : <LoadingSpinner />}
       </Container>
     </div>
   );
