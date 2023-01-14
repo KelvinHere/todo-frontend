@@ -1,12 +1,13 @@
+import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 
 
-
-
 function TaskForm({updateTasks}) {
+    let [taskDescription, setTaskDescription] = useState('');
+    let [taskImportance, setTaskImportance] = useState('')
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -21,6 +22,8 @@ function TaskForm({updateTasks}) {
                  completed: false
              })
         updateTasks();
+        setTaskDescription('');
+        setTaskImportance('Importance');
     }
 
     return (
@@ -29,13 +32,20 @@ function TaskForm({updateTasks}) {
                 <Row>
                     <Col xs={12} lg={8}>
                         <Form.Group className="mb-3 mb-lg-0" controlId="formTaskDescription">
-                            <Form.Control type="text" placeholder="Enter new task" />
+                            <Form.Control 
+                                type="text"
+                                placeholder="Enter new task"
+                                onChange={e => setTaskDescription(e.target.value)} 
+                                value={taskDescription} />
                         </Form.Group>
                     </Col>
                     <Col xs={12} lg={2}>
                         <Form.Group className="mb-3 mb-lg-0" controlId="formImportance">
-                            <Form.Select aria-label="Default select example">
-                                <option>Importance</option>
+                            <Form.Select 
+                                aria-label="importance-value"
+                                onChange={e => setTaskImportance(e.target.value)} 
+                                value={taskImportance}>
+                                <option value='Importance'>Importance</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
