@@ -6,39 +6,26 @@ import axios from 'axios';
 const SortButtons = ({ setTasks, updateTasks }) => {
     function handleSortTaskAsc(e) {
         axios.get('http://localhost:8000/?sortBy=NAME_ASC').then(
-            (result) => {
-                setTasks(result.data);
-            }
+            (result) => {setTasks(result.data);}
         );
-        updateTasks();
     }
 
     function handleSortTaskDesc(e) {
         axios.get('http://localhost:8000/?sortBy=NAME_DESC').then(
-            (result) => {
-                setTasks(result.data);
-            }
+            (result) => {setTasks(result.data);}
         );
-        updateTasks();
-        e.setState({backgroundColour: "black"})
     }
 
     function handleSortImportanceAsc(e) {
         axios.get('http://localhost:8000/?sortBy=IMPORTANCE_ASC').then(
-            (result) => {
-                setTasks(result.data);
-            }
+            (result) => {setTasks(result.data);}
         );
-        updateTasks();
     }
 
     function handleSortImportanceDesc(e) {
         axios.get('http://localhost:8000/?sortBy=IMPORTANCE_DESC').then(
-            (result) => {
-                setTasks(result.data);
-            }
+            (result) => {setTasks(result.data);}
         );
-        updateTasks();
     }
     
 

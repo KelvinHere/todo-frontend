@@ -20,9 +20,9 @@ function App() {
     )
   }
 
-  const updateTasks = () => {
-    getTasks();
-  }
+   const updateTasks = () => {
+     getTasks();
+   }
 
   const [tasks, setTasks] = useState(null)
   useEffect(() => {
