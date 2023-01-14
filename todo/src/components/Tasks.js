@@ -16,14 +16,15 @@ function Tasks({ tasks, updateTasks }) {
       incompleteTasks.push(task);
     }
   }
-
+  
   const updateTask = async (task, importance, id, completedUpdate) => {
     const res = await axios.put('http://localhost:8000/'+id, {'completed': completedUpdate, 'importance': importance, 'task': task});
     updateTasks();
   }
-
+  
   return (
     <section className="tasks p-0 mx-0">
+      <p><b>In Progress</b></p>
       <Row className="bg-dark text-white rounded-top m-0 p-3">
         <Col className="col-1">
           <p className='mb-0'><b>Done</b></p>

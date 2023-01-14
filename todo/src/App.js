@@ -42,8 +42,8 @@ function App() {
 
       <Container fluid>
         <h1 className='mt-3'>Tasks</h1>
-        <TaskForm updateTasks={updateTasks} />
         <SortButtons setQuery={setQuery} setSortOrder={setSortOrder} />
+        <TaskForm updateTasks={updateTasks} />
         {tasks ? <Tasks tasks={tasks} updateTasks={updateTasks} query={query} /> : <LoadingSpinner />}
       </Container>
     </div>
