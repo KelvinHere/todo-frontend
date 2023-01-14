@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 
 const SortButtons = ({ setQuery, setSortOrder, query }) => {
-
+    
     const buttonLeftCSS = {
         'border-radius': '10px 0px 0px 10px'
     };
@@ -14,6 +14,7 @@ const SortButtons = ({ setQuery, setSortOrder, query }) => {
     const buttonRightCSS = {
         'border-radius': '0px 10px 10px 0px'
     };
+    
 
     function handleQuery(incomingQuery) {
         setQuery(incomingQuery);

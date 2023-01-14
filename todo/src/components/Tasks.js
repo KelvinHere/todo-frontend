@@ -52,7 +52,7 @@ function Tasks({ tasks, updateTasks }) {
             <p className='mb-0'>{task.importance}</p>
           </Col>
           <Col>
-            <p className='mb-0'>{task.created}</p>
+            <p className='mb-0'>{task.created.substring(11,20)}&nbsp;|&nbsp;{task.created.substring(0,10)}</p>
           </Col>
         </Row>
       ))}
